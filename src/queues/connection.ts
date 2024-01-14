@@ -16,7 +16,7 @@ export async function createConnection(): Promise<Channel | undefined> {
         );
         const channel: Channel = await connection.createChannel();
         log.info("Notification server connected to queue successfully...");
-        closeConnection;
+        closeConnection(channel, connection);
 
         return channel;
     } catch (error) {
