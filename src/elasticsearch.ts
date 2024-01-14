@@ -17,6 +17,7 @@ const elasticSearchClient = new Client({
 export async function checkConnection(): Promise<void> {
     let isConnected = false;
     while (!isConnected) {
+        log.info(`NotificationService connecting to Elasticsearch...`);
         try {
             const health: ClusterHealthResponse =
                 await elasticSearchClient.cluster.health({});
