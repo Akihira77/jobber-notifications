@@ -11,6 +11,19 @@ const log: Logger = winstonLogger(
     "debug"
 );
 
+const exchangeNamesAndRoutingKeys = {
+    email: {
+        exchangeName: "jobber-email-notification",
+        routingKey: "auth-email",
+        queueName: "auth-email-queue"
+    },
+    order: {
+        exchangeName: "jobber-order-notification",
+        routingKey: "order-email",
+        queueName: "order-email-queue"
+    }
+};
+
 export async function consumeAuthEmailMessages(
     channel: Channel
 ): Promise<void> {
@@ -19,9 +32,8 @@ export async function consumeAuthEmailMessages(
             channel = (await createConnection()) as Channel;
         }
 
-        const exchangeName = "jobber-email-notification";
-        const routingKey = "auth-email";
-        const queueName = "auth-email-queue";
+        const { exchangeName, routingKey, queueName } =
+            exchangeNamesAndRoutingKeys.email;
         await channel.assertExchange(exchangeName, "direct");
         const jobberQueue = await channel.assertQueue(queueName, {
             durable: true,
@@ -71,9 +83,8 @@ export async function consumeOrderEmailMessages(
             channel = (await createConnection()) as Channel;
         }
 
-        const exchangeName = "jobber-order-notification";
-        const routingKey = "order-email";
-        const queueName = "order-email-queue";
+        const { exchangeName, routingKey, queueName } =
+            exchangeNamesAndRoutingKeys.order;
         await channel.assertExchange(exchangeName, "direct");
         const jobberQueue = await channel.assertQueue(queueName, {
             durable: true,
