@@ -4,7 +4,7 @@ import http from "http";
 import { winstonLogger } from "@Akihira77/jobber-shared";
 import { Logger } from "winston";
 import { Application } from "express";
-import { ELASTIC_SEARCH_URL } from "@notifications/config";
+import { ELASTIC_SEARCH_URL, PORT } from "@notifications/config";
 import { healthRoute } from "@notifications/routes";
 import { checkConnection } from "@notifications/elasticsearch";
 import { createConnection } from "@notifications/queues/connection";
@@ -14,7 +14,6 @@ import {
     consumeOrderEmailMessages
 } from "@notifications/queues/email.consumer";
 
-const PORT = 4001;
 const log: Logger = winstonLogger(
     `${ELASTIC_SEARCH_URL}`,
     "notificationServer",
@@ -74,7 +73,7 @@ function startServer(app: Application): void {
             `Worker with process id of ${process.pid} of notification server has started`
         );
 
-        httpServer.listen(PORT, () => {
+        httpServer.listen(Number(PORT), () => {
             log.info(`Notification server running on port ${PORT}`);
         });
     } catch (error) {

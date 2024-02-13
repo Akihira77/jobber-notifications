@@ -3,6 +3,8 @@ export {};
 declare global {
     namespace NodeJS {
         interface ProcessEnv {
+
+            PORT: string;
             ENABLE_APM: string;
             NODE_ENV: string;
             CLIENT_URL: string;

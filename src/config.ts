@@ -7,6 +7,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 export const {
+    PORT,
     CLIENT_URL,
     ELASTIC_SEARCH_URL,
     NODE_ENV,
