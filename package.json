@@ -37,12 +37,12 @@
         "tsconfig-paths": "^4.2.0"
     },
     "dependencies": {
-        "@Akihira77/jobber-shared": "^0.0.8",
+        "@Akihira77/jobber-shared": "^0.0.14",
         "@elastic/elasticsearch": "^8.11.0",
         "amqplib": "^0.10.3",
         "dotenv": "^16.3.1",
         "ejs": "^3.1.9",
-        "elastic-apm-node": "^4.1.0",
+        "elastic-apm-node": "^4.4.1",
         "email-templates": "^11.1.1",
         "eslint": "^8.56.0",
         "eslint-plugin-import": "^2.29.1",

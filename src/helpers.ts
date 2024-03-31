@@ -22,9 +22,10 @@ export async function emailTemplates(
     locals: IEmailLocals
 ): Promise<void> {
     try {
-        const smtpTransport: Transporter = nodemailer.createTransport({
-            host: "smtp.ethereal.email",
-            port: 587,
+        const transport: Transporter = nodemailer.createTransport({
+            // host: "smtp.ethereal.email",
+            service: "gmail",
+            // port: 587,
             auth: {
                 user: SENDER_EMAIL,
                 pass: SENDER_EMAIL_PASSWORD
@@ -37,7 +38,7 @@ export async function emailTemplates(
             },
             send: true,
             preview: false,
-            transport: smtpTransport,
+            transport,
             views: {
                 options: {
                     extension: "ejs"
