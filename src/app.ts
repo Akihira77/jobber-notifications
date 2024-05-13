@@ -6,7 +6,7 @@ import { start } from "@notifications/server";
 
 const log: Logger = winstonLogger(
     `${ELASTIC_SEARCH_URL}`,
-    "notificationServiceApp",
+    "notificationService",
     "debug"
 );
 

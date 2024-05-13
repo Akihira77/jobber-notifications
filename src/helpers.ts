@@ -16,11 +16,11 @@ const log: Logger = winstonLogger(
     "debug"
 );
 
-export async function emailTemplates(
+export function emailTemplates(
     template: string,
     sendTo: string,
     locals: IEmailLocals
-): Promise<void> {
+): void {
     try {
         const transport: Transporter = nodemailer.createTransport({
             // host: "smtp.ethereal.email",
@@ -53,7 +53,7 @@ export async function emailTemplates(
             }
         });
 
-        await email.send({
+        email.send({
             template: path.join(__dirname, "..", "src/emails", template),
             message: { to: sendTo },
             locals

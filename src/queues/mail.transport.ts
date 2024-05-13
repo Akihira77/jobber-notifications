@@ -9,11 +9,11 @@ const log: Logger = winstonLogger(
     "debug"
 );
 
-export async function sendEmail(
+export function sendEmail(
     template: string,
     receiverEmail: string,
     locals: IEmailLocals
-): Promise<void> {
+): void {
     try {
         // email templates
         emailTemplates(template, receiverEmail, locals);

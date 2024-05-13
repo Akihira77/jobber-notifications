@@ -11,7 +11,7 @@ const log: Logger = winstonLogger(
 );
 
 const elasticSearchClient = new Client({
-    node: ELASTIC_SEARCH_URL
+    node: `${ELASTIC_SEARCH_URL}`
 });
 
 export async function checkConnection(): Promise<void> {

@@ -4,6 +4,8 @@ import { Channel, ConsumeMessage } from "amqplib";
 import { Logger } from "winston";
 import { createConnection } from "@notifications/queues/connection";
 import { sendEmail } from "@notifications/queues/mail.transport";
+import { orderDeliveredSchema, orderExtensionApprovalSchema, orderExtensionSchema, orderPlacedSchema } from "@notifications/schemas/emailLocal.schema";
+import { Value } from "@sinclair/typebox/value"
 
 const log: Logger = winstonLogger(
     `${ELASTIC_SEARCH_URL}`,
@@ -29,7 +31,7 @@ export async function consumeAuthEmailMessages(
 ): Promise<void> {
     try {
         if (!channel) {
-            channel = (await createConnection()) as Channel;
+            channel = await createConnection();
         }
 
         const { exchangeName, routingKey, queueName } =
@@ -45,26 +47,67 @@ export async function consumeAuthEmailMessages(
         channel.consume(
             jobberQueue.queue,
             async (msg: ConsumeMessage | null) => {
-                const {
-                    receiverEmail,
-                    username,
-                    verifyLink,
-                    resetLink,
-                    template
-                } = JSON.parse(msg!.content.toString());
-                const locals: IEmailLocals = {
-                    appLink: `${CLIENT_URL}`,
-                    appIcon: "https://i.ibb.co/Kyp2m0t/cover.png",
-                    username,
-                    verifyLink,
-                    resetLink
-                };
+                const appLink = `${CLIENT_URL}`;
+                const appIcon = "https://i.ibb.co/Kyp2m0t/cover.png";
+                try {
+                    const { template, receiverEmail } = JSON.parse(
+                        msg!.content.toString()
+                    );
 
-                // send emails
-                await sendEmail(template, receiverEmail, locals);
+                    if (template === "forgotPassword") {
+                        const { resetLink, username } = JSON.parse(
+                            msg!.content.toString()
+                        );
 
-                // acknowledge
-                channel.ack(msg!);
+                        const locals: IEmailLocals = {
+                            appLink: appLink,
+                            appIcon: appIcon,
+                            username,
+                            resetLink
+                        };
+
+                        sendEmail(template, receiverEmail, locals);
+
+                        channel.ack(msg!);
+                    } else if (template === "resetPasswordSuccess") {
+                        const { username } = JSON.parse(
+                            msg!.content.toString()
+                        );
+
+                        const locals: IEmailLocals = {
+                            appLink: appLink,
+                            appIcon: appIcon,
+                            username
+                        };
+
+                        sendEmail(template, receiverEmail, locals);
+
+                        channel.ack(msg!);
+                    } else if (template === "verifyEmail") {
+                        const { verifyLink } = JSON.parse(
+                            msg!.content.toString()
+                        );
+
+                        const locals: IEmailLocals = {
+                            appLink: appLink,
+                            appIcon: appIcon,
+                            verifyLink
+                        };
+
+                        sendEmail(template, receiverEmail, locals);
+
+                        channel.ack(msg!);
+                    }
+
+                    channel.reject(msg!, false);
+                } catch (error) {
+                    channel.reject(msg!, false);
+
+                    log.error(
+                        "consuming message got errors. consumeAuthEmailMessage() method",
+                        error
+                    );
+                }
             }
         );
     } catch (error) {
@@ -96,76 +139,191 @@ export async function consumeOrderEmailMessages(
         channel.consume(
             jobberQueue.queue,
             async (msg: ConsumeMessage | null) => {
-                const {
-                    receiverEmail,
-                    username,
-                    template,
-                    sender,
-                    offerLink,
-                    amount,
-                    buyerUsername,
-                    sellerUsername,
-                    title,
-                    description,
-                    deliveryDays,
-                    orderId,
-                    orderDue,
-                    requirements,
-                    orderUrl,
-                    originalDate,
-                    newDate,
-                    reason,
-                    subject,
-                    header,
-                    type,
-                    message,
-                    serviceFee,
-                    total
-                } = JSON.parse(msg!.content.toString());
+                try {
+                    const { template } = JSON.parse(msg!.content.toString());
 
-                const locals: IEmailLocals = {
-                    appLink: `${CLIENT_URL}`,
-                    appIcon: "https://i.ibb.co/Kyp2m0t/cover.png",
-                    username,
-                    sender,
-                    offerLink,
-                    amount,
-                    buyerUsername,
-                    sellerUsername,
-                    title,
-                    description,
-                    deliveryDays,
-                    orderId,
-                    orderDue,
-                    requirements,
-                    orderUrl,
-                    originalDate,
-                    newDate,
-                    reason,
-                    subject,
-                    header,
-                    type,
-                    message,
-                    serviceFee,
-                    total
-                };
+                    if (template === "orderPlaced") {
+                        orderPlaceHandler(msg!);
+                        channel.ack(msg!);
+                        return;
+                    } else if (template === "orderDelivered") {
+                        orderDeliverHandler(msg!);
+                        channel.ack(msg!);
+                        return;
+                    } else if (template === "orderExtension") {
+                        orderExtensionHandler(msg!);
+                        channel.ack(msg!);
+                        return;
+                    } else if (template === "orderExtensionApproval") {
+                        orderExtensionApprovalHandler(msg!);
+                        channel.ack(msg!);
+                        return;
+                    }
 
-                // send emails
-                if (template === "orderPlaced") {
-                    await sendEmail("orderPlaced", receiverEmail, locals);
-                    await sendEmail("orderReceipt", receiverEmail, locals);
-                } else {
-                    await sendEmail(template, receiverEmail, locals);
+                    channel.reject(msg!, false);
+                } catch (error) {
+                    channel.reject(msg!, false);
+
+                    log.error(
+                        "consuming message got errors. consumeOrderEmailMessages() method",
+                        error
+                    );
                 }
-
-                // acknowledge
-                channel.ack(msg!);
             }
         );
     } catch (error) {
         log.error(
-            "NotificationService EmailConsumer consumeAuthEmailMessages(): method error:",
+            "NotificationService EmailConsumer consumeOrderEmailMessages(): method error:",
             error
         );
+    }
+}
+
+
+function orderPlaceHandler(msg: ConsumeMessage) {
+    try {
+        const {
+            orderId,
+            buyerEmail,
+            sellerEmail,
+            orderDue,
+            amount,
+            buyerUsername,
+            sellerUsername,
+            title,
+            description,
+            requirements,
+            serviceFee,
+            total,
+            orderUrl
+        } = JSON.parse(msg!.content.toString());
+
+        if (!Value.Check(orderPlacedSchema, msg!.content)) {
+            throw new Error(Value.Errors(orderPlacedSchema, msg!.content).First.toString());
+        }
+
+        const locals: IEmailLocals = {
+            appLink: `${CLIENT_URL}`,
+            appIcon: "https://i.ibb.co/Kyp2m0t/cover.png",
+            orderId,
+            orderDue,
+            amount,
+            buyerUsername,
+            sellerUsername,
+            title,
+            description,
+            requirements,
+            serviceFee,
+            total,
+            orderUrl
+        };
+
+        sendEmail("orderPlaced", sellerEmail, locals);
+        sendEmail("orderReceipt", buyerEmail, locals);
+    } catch (error) {
+        throw error;
+    }
+}
+
+function orderDeliverHandler(msg: ConsumeMessage) {
+    try {
+        const {
+            orderId,
+            buyerUsername,
+            sellerUsername,
+            title,
+            description,
+            orderUrl,
+            receiverEmail
+        } = JSON.parse(msg!.content.toString());
+
+        if (!Value.Check(orderDeliveredSchema, msg!.content)) {
+            throw new Error(Value.Errors(orderDeliveredSchema, msg!.content).First.toString());
+        }
+
+        const locals: IEmailLocals = {
+            appLink: `${CLIENT_URL}`,
+            appIcon: "https://i.ibb.co/Kyp2m0t/cover.png",
+            orderId,
+            buyerUsername,
+            sellerUsername,
+            title,
+            description,
+            orderUrl
+        };
+
+        sendEmail("orderDelivered", receiverEmail, locals);
+    } catch (error) {
+        throw error;
+    }
+}
+
+function orderExtensionHandler(msg: ConsumeMessage) {
+    try {
+        const {
+            orderId,
+            buyerUsername,
+            sellerUsername,
+            originalDate,
+            newDate,
+            reason,
+            orderUrl,
+            receiverEmail
+        } = JSON.parse(msg!.content.toString());
+
+        if (!Value.Check(orderExtensionSchema, msg!.content)) {
+            throw new Error(Value.Errors(orderExtensionSchema, msg!.content).First.toString());
+        }
+
+        const locals: IEmailLocals = {
+            appLink: `${CLIENT_URL}`,
+            appIcon: "https://i.ibb.co/Kyp2m0t/cover.png",
+            orderId,
+            buyerUsername,
+            sellerUsername,
+            originalDate,
+            newDate,
+            reason,
+            orderUrl
+        };
+
+        sendEmail("orderExtension", receiverEmail, locals);
+    } catch (error) {
+        throw error;
+    }
+}
+
+function orderExtensionApprovalHandler(msg: ConsumeMessage) {
+    try {
+        const {
+            subject,
+            buyerUsername,
+            sellerUsername,
+            type,
+            message,
+            header,
+            orderUrl,
+            receiverEmail
+        } = JSON.parse(msg!.content.toString());
+
+        if (!Value.Check(orderExtensionApprovalSchema, msg?.content)) {
+            throw new Error(Value.Errors(orderExtensionApprovalSchema, msg?.content).First.toString());
+        }
+
+        const locals: IEmailLocals = {
+            appLink: `${CLIENT_URL}`,
+            appIcon: "https://i.ibb.co/Kyp2m0t/cover.png",
+            subject,
+            buyerUsername,
+            sellerUsername,
+            header,
+            type,
+            message,
+            orderUrl
+        };
+
+        sendEmail("orderExtensionApproval", receiverEmail, locals);
+    } catch (error) {
+        throw error
     }
 }
