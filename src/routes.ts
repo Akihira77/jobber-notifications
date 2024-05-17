@@ -5,7 +5,9 @@ const router: Router = express.Router();
 
 export function healthRoute(): Router {
     router.get("/notification-health", (_req: Request, res: Response) => {
-        res.status(StatusCodes.OK).send("Notification service is healthy.");
+        res.status(StatusCodes.OK).send(
+            "Notification service is healthy and OK."
+        );
     });
 
     return router;

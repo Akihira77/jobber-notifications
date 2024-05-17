@@ -24,7 +24,7 @@ export const orderDeliveredSchema = Type.Object({
     description: Type.String(),
     orderUrl: Type.String(),
     receiverEmail: Type.String()
-})
+});
 
 export const orderExtensionSchema = Type.Object({
     orderId: Type.String(),
@@ -35,7 +35,7 @@ export const orderExtensionSchema = Type.Object({
     reason: Type.String(),
     orderUrl: Type.String(),
     receiverEmail: Type.String()
-})
+});
 
 export const orderExtensionApprovalSchema = Type.Object({
     subject: Type.String(),
@@ -46,4 +46,4 @@ export const orderExtensionApprovalSchema = Type.Object({
     header: Type.String(),
     orderUrl: Type.String(),
     receiverEmail: Type.String()
-})
+});

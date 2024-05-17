@@ -1,17 +1,15 @@
-import { CLIENT_URL, ELASTIC_SEARCH_URL } from "@notifications/config";
-import { IEmailLocals, winstonLogger } from "@Akihira77/jobber-shared";
+import { CLIENT_URL, logger } from "@notifications/config";
+import { IEmailLocals } from "@Akihira77/jobber-shared";
 import { Channel, ConsumeMessage } from "amqplib";
-import { Logger } from "winston";
 import { createConnection } from "@notifications/queues/connection";
 import { sendEmail } from "@notifications/queues/mail.transport";
-import { orderDeliveredSchema, orderExtensionApprovalSchema, orderExtensionSchema, orderPlacedSchema } from "@notifications/schemas/emailLocal.schema";
-import { Value } from "@sinclair/typebox/value"
-
-const log: Logger = winstonLogger(
-    `${ELASTIC_SEARCH_URL}`,
-    "emailConsumer",
-    "debug"
-);
+import {
+    orderDeliveredSchema,
+    orderExtensionApprovalSchema,
+    orderExtensionSchema,
+    orderPlacedSchema
+} from "@notifications/schemas/emailLocal.schema";
+import { Value } from "@sinclair/typebox/value";
 
 const exchangeNamesAndRoutingKeys = {
     email: {
@@ -103,15 +101,17 @@ export async function consumeAuthEmailMessages(
                 } catch (error) {
                     channel.reject(msg!, false);
 
-                    log.error(
-                        "consuming message got errors. consumeAuthEmailMessage() method",
+                    logger(
+                        "queues/email.consumer.ts - consumeAuthEmailMessages()"
+                    ).error(
+                        "consuming message got errors. consumeAuthEmailMessages() method",
                         error
                     );
                 }
             }
         );
     } catch (error) {
-        log.error(
+        logger("queues/email.consumer.ts - consumeAuthEmailMessages()").error(
             "NotificationService EmailConsumer consumeAuthEmailMessages(): method error:",
             error
         );
@@ -164,7 +164,9 @@ export async function consumeOrderEmailMessages(
                 } catch (error) {
                     channel.reject(msg!, false);
 
-                    log.error(
+                    logger(
+                        "queues/email.consumer.ts - consumeOrderEmailMessages()"
+                    ).error(
                         "consuming message got errors. consumeOrderEmailMessages() method",
                         error
                     );
@@ -172,13 +174,12 @@ export async function consumeOrderEmailMessages(
             }
         );
     } catch (error) {
-        log.error(
+        logger("queues/email.consumer.ts - consumeOrderEmailMessages()").error(
             "NotificationService EmailConsumer consumeOrderEmailMessages(): method error:",
             error
         );
     }
 }
-
 
 function orderPlaceHandler(msg: ConsumeMessage) {
     try {
@@ -199,7 +200,9 @@ function orderPlaceHandler(msg: ConsumeMessage) {
         } = JSON.parse(msg!.content.toString());
 
         if (!Value.Check(orderPlacedSchema, msg!.content)) {
-            throw new Error(Value.Errors(orderPlacedSchema, msg!.content).First.toString());
+            throw new Error(
+                Value.Errors(orderPlacedSchema, msg!.content).First.toString()
+            );
         }
 
         const locals: IEmailLocals = {
@@ -238,7 +241,12 @@ function orderDeliverHandler(msg: ConsumeMessage) {
         } = JSON.parse(msg!.content.toString());
 
         if (!Value.Check(orderDeliveredSchema, msg!.content)) {
-            throw new Error(Value.Errors(orderDeliveredSchema, msg!.content).First.toString());
+            throw new Error(
+                Value.Errors(
+                    orderDeliveredSchema,
+                    msg!.content
+                ).First.toString()
+            );
         }
 
         const locals: IEmailLocals = {
@@ -272,7 +280,12 @@ function orderExtensionHandler(msg: ConsumeMessage) {
         } = JSON.parse(msg!.content.toString());
 
         if (!Value.Check(orderExtensionSchema, msg!.content)) {
-            throw new Error(Value.Errors(orderExtensionSchema, msg!.content).First.toString());
+            throw new Error(
+                Value.Errors(
+                    orderExtensionSchema,
+                    msg!.content
+                ).First.toString()
+            );
         }
 
         const locals: IEmailLocals = {
@@ -307,7 +320,12 @@ function orderExtensionApprovalHandler(msg: ConsumeMessage) {
         } = JSON.parse(msg!.content.toString());
 
         if (!Value.Check(orderExtensionApprovalSchema, msg?.content)) {
-            throw new Error(Value.Errors(orderExtensionApprovalSchema, msg?.content).First.toString());
+            throw new Error(
+                Value.Errors(
+                    orderExtensionApprovalSchema,
+                    msg?.content
+                ).First.toString()
+            );
         }
 
         const locals: IEmailLocals = {
@@ -324,6 +342,6 @@ function orderExtensionApprovalHandler(msg: ConsumeMessage) {
 
         sendEmail("orderExtensionApproval", receiverEmail, locals);
     } catch (error) {
-        throw error
+        throw error;
     }
 }

@@ -1,3 +1,4 @@
+import { winstonLogger } from "@Akihira77/jobber-shared";
 import dotenv from "dotenv";
 
 if (process.env.NODE_ENV !== "production") {
@@ -34,3 +35,10 @@ if (NODE_ENV === "production" && ENABLE_APM == "1") {
         captureErrorLogStackTraces: "always"
     });
 }
+
+export const logger = (moduleName?: string) =>
+    winstonLogger(
+        `${ELASTIC_SEARCH_URL}`,
+        moduleName ?? "Notification Service",
+        "debug"
+    );

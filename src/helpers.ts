@@ -1,20 +1,13 @@
 import path from "path";
 
-import { IEmailLocals, winstonLogger } from "@Akihira77/jobber-shared";
+import { IEmailLocals } from "@Akihira77/jobber-shared";
 import {
-    ELASTIC_SEARCH_URL,
+    logger,
     SENDER_EMAIL,
     SENDER_EMAIL_PASSWORD
 } from "@notifications/config";
-import { Logger } from "winston";
 import nodemailer, { Transporter } from "nodemailer";
 import Email from "email-templates";
-
-const log: Logger = winstonLogger(
-    `${ELASTIC_SEARCH_URL}`,
-    "mailTransportHelper",
-    "debug"
-);
 
 export function emailTemplates(
     template: string,
@@ -59,6 +52,6 @@ export function emailTemplates(
             locals
         });
     } catch (error) {
-        log.error(error);
+        logger("helpers.ts - emailTemplates").error(error);
     }
 }
