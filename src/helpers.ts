@@ -1,18 +1,16 @@
 import path from "path";
 
 import { IEmailLocals } from "@Akihira77/jobber-shared";
-import {
-    logger,
-    SENDER_EMAIL,
-    SENDER_EMAIL_PASSWORD
-} from "@notifications/config";
+import { SENDER_EMAIL, SENDER_EMAIL_PASSWORD } from "@notifications/config";
 import nodemailer, { Transporter } from "nodemailer";
 import Email from "email-templates";
+import { Logger } from "winston";
 
 export function emailTemplates(
     template: string,
     sendTo: string,
-    locals: IEmailLocals
+    locals: IEmailLocals,
+    logger: (moduleName: string) => Logger
 ): void {
     try {
         const transport: Transporter = nodemailer.createTransport({

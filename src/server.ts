@@ -2,31 +2,30 @@ import "express-async-errors";
 import http from "http";
 
 import { Application } from "express";
-import { logger, PORT } from "@notifications/config";
+import { PORT } from "@notifications/config";
 import { healthRoute } from "@notifications/routes";
-import { checkConnection } from "@notifications/elasticsearch";
-import { createConnection } from "@notifications/queues/connection";
-import { Channel } from "amqplib";
-import {
-    consumeAuthEmailMessages,
-    consumeOrderEmailMessages
-} from "@notifications/queues/email.consumer";
+import { Logger } from "winston";
+import { NotificationQueue } from "./queues/notification.queue";
+import { ElasticSearchClient } from "./elasticsearch";
 
-export function start(app: Application): void {
-    startServer(app);
+export async function start(
+    app: Application,
+    logger: (moduleName: string) => Logger
+): Promise<void> {
+    await startQueues(logger);
+    startElasticSearch(logger);
+
+    startServer(app, logger);
     app.use("", healthRoute());
-
-    startQueues();
-
-    startElasticSearch();
 }
 
-async function startQueues(): Promise<void> {
-    const emailChanel = (await createConnection()) as Channel;
-
-    await consumeAuthEmailMessages(emailChanel);
-    await consumeOrderEmailMessages(emailChanel);
-
+async function startQueues(
+    logger: (moduleName: string) => Logger
+): Promise<void> {
+    const queue = new NotificationQueue(null, logger);
+    await queue.createConnection();
+    queue.consumeAuthEmailMessages();
+    queue.consumeOrderEmailMessages();
     // Testing
     // const verificationLink = `${CLIENT_URL}/confirm_email?v_token=123213213adwawda`;
     // const messageDetails: IEmailMessageDetails = {
@@ -54,11 +53,19 @@ async function startQueues(): Promise<void> {
     // );
 }
 
-function startElasticSearch(): void {
-    checkConnection();
+async function startElasticSearch(
+    logger: (moduleName: string) => Logger
+): Promise<ElasticSearchClient> {
+    const elastic = new ElasticSearchClient(logger);
+    await elastic.checkConnection();
+
+    return elastic;
 }
 
-function startServer(app: Application): void {
+function startServer(
+    app: Application,
+    logger: (moduleName: string) => Logger
+): void {
     try {
         const httpServer: http.Server = new http.Server(app);
         logger("server.ts - startServer()").info(
