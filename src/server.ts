@@ -1,22 +1,25 @@
-import "express-async-errors";
-import http from "http";
-
-import { Application } from "express";
 import { PORT } from "@notifications/config";
-import { healthRoute } from "@notifications/routes";
 import { Logger } from "winston";
 import { NotificationQueue } from "./queues/notification.queue";
 import { ElasticSearchClient } from "./elasticsearch";
+import { Context, Hono } from "hono";
+import { StatusCodes } from "http-status-codes";
+import { serve } from "@hono/node-server";
 
 export async function start(
-    app: Application,
+    app: Hono,
     logger: (moduleName: string) => Logger
 ): Promise<void> {
     await startQueues(logger);
     startElasticSearch(logger);
 
     startServer(app, logger);
-    app.use("", healthRoute());
+    app.get("/notification-health", (c: Context) => {
+        return c.text(
+            "Notification service is healthy and OK.",
+            StatusCodes.OK
+        );
+    });
 }
 
 async function startQueues(
@@ -62,19 +65,15 @@ async function startElasticSearch(
     return elastic;
 }
 
-function startServer(
-    app: Application,
-    logger: (moduleName: string) => Logger
-): void {
+function startServer(hono: Hono, logger: (moduleName: string) => Logger): void {
     try {
-        const httpServer: http.Server = new http.Server(app);
         logger("server.ts - startServer()").info(
             `NotificationService has started with pid ${process.pid}`
         );
 
-        httpServer.listen(Number(PORT), () => {
+        serve({ fetch: hono.fetch, port: Number(PORT) }, (info) => {
             logger("server.ts - startServer()").info(
-                `NotificationService running on port ${PORT}`
+                `NotificationService running on port ${info.port}`
             );
         });
     } catch (error) {

@@ -32,5 +32,13 @@ export class ElasticSearchClient {
                 );
             }
         }
+
+        this.closeConnection(this.client);
+    }
+
+    closeConnection(client: Client): void {
+        process.once("exit", async () => {
+            await client.close();
+        });
     }
 }
