@@ -8,30 +8,30 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.start = void 0;
-require("express-async-errors");
-const http_1 = __importDefault(require("http"));
 const config_1 = require("./config");
-const routes_1 = require("./routes");
+const notification_queue_1 = require("./queues/notification.queue");
 const elasticsearch_1 = require("./elasticsearch");
-const connection_1 = require("./queues/connection");
-const email_consumer_1 = require("./queues/email.consumer");
-function start(app) {
-    startServer(app);
-    app.use("", (0, routes_1.healthRoute)());
-    startQueues();
-    startElasticSearch();
+const http_status_codes_1 = require("http-status-codes");
+const node_server_1 = require("@hono/node-server");
+function start(app, logger) {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield startQueues(logger);
+        startElasticSearch(logger);
+        startServer(app, logger);
+        app.get("/notification-health", (c) => {
+            return c.text("Notification service is healthy and OK.", http_status_codes_1.StatusCodes.OK);
+        });
+    });
 }
 exports.start = start;
-function startQueues() {
+function startQueues(logger) {
     return __awaiter(this, void 0, void 0, function* () {
-        const emailChanel = (yield (0, connection_1.createConnection)());
-        yield (0, email_consumer_1.consumeAuthEmailMessages)(emailChanel);
-        yield (0, email_consumer_1.consumeOrderEmailMessages)(emailChanel);
+        const queue = new notification_queue_1.NotificationQueue(null, logger);
+        yield queue.createConnection();
+        queue.consumeAuthEmailMessages();
+        queue.consumeOrderEmailMessages();
         // Testing
         // const verificationLink = `${CLIENT_URL}/confirm_email?v_token=123213213adwawda`;
         // const messageDetails: IEmailMessageDetails = {
@@ -55,19 +55,22 @@ function startQueues() {
         // );
     });
 }
-function startElasticSearch() {
-    (0, elasticsearch_1.checkConnection)();
+function startElasticSearch(logger) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const elastic = new elasticsearch_1.ElasticSearchClient(logger);
+        yield elastic.checkConnection();
+        return elastic;
+    });
 }
-function startServer(app) {
+function startServer(hono, logger) {
     try {
-        const httpServer = new http_1.default.Server(app);
-        (0, config_1.logger)("server.ts - startServer()").info(`NotificationService has started with pid ${process.pid}`);
-        httpServer.listen(Number(config_1.PORT), () => {
-            (0, config_1.logger)("server.ts - startServer()").info(`NotificationService running on port ${config_1.PORT}`);
+        logger("server.ts - startServer()").info(`NotificationService has started with pid ${process.pid}`);
+        (0, node_server_1.serve)({ fetch: hono.fetch, port: Number(config_1.PORT) }, (info) => {
+            logger("server.ts - startServer()").info(`NotificationService running on port ${info.port}`);
         });
     }
     catch (error) {
-        (0, config_1.logger)("server.ts - startServer()").error("NotificationService startServer() method error:", error);
+        logger("server.ts - startServer()").error("NotificationService startServer() method error:", error);
     }
 }
 //# sourceMappingURL=server.js.map

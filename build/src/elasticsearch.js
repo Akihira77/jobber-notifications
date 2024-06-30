@@ -9,27 +9,38 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkConnection = void 0;
+exports.ElasticSearchClient = void 0;
 const elasticsearch_1 = require("@elastic/elasticsearch");
 const config_1 = require("./config");
-const elasticSearchClient = new elasticsearch_1.Client({
-    node: `${config_1.ELASTIC_SEARCH_URL}`
-});
-function checkConnection() {
-    return __awaiter(this, void 0, void 0, function* () {
-        let isConnected = false;
-        while (!isConnected) {
-            (0, config_1.logger)("elasticsearch.ts - checkConnection()").info(`NotificationService connecting to Elasticsearch...`);
-            try {
-                const health = yield elasticSearchClient.cluster.health({});
-                (0, config_1.logger)("elasticsearch.ts - checkConnection()").info(`NotificationService Elasticsearch health status - ${health.status}`);
-                isConnected = true;
+class ElasticSearchClient {
+    constructor(logger) {
+        this.logger = logger;
+        this.client = new elasticsearch_1.Client({
+            node: `${config_1.ELASTIC_SEARCH_URL}`
+        });
+    }
+    checkConnection() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let isConnected = false;
+            while (!isConnected) {
+                this.logger("elasticsearch.ts - checkConnection()").info(`NotificationService connecting to Elasticsearch...`);
+                try {
+                    const health = yield this.client.cluster.health({});
+                    this.logger("elasticsearch.ts - checkConnection()").info(`NotificationService Elasticsearch health status - ${health.status}`);
+                    isConnected = true;
+                }
+                catch (error) {
+                    this.logger("elasticsearch.ts - checkConnection()").error("NotificationService checkConnection() method error:", error);
+                }
             }
-            catch (error) {
-                (0, config_1.logger)("elasticsearch.ts - checkConnection()").error("NotificationService checkConnection() method error:", error);
-            }
-        }
-    });
+            this.closeConnection(this.client);
+        });
+    }
+    closeConnection(client) {
+        process.once("exit", () => __awaiter(this, void 0, void 0, function* () {
+            yield client.close();
+        }));
+    }
 }
-exports.checkConnection = checkConnection;
+exports.ElasticSearchClient = ElasticSearchClient;
 //# sourceMappingURL=elasticsearch.js.map

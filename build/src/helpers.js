@@ -8,7 +8,7 @@ const path_1 = __importDefault(require("path"));
 const config_1 = require("./config");
 const nodemailer_1 = __importDefault(require("nodemailer"));
 const email_templates_1 = __importDefault(require("email-templates"));
-function emailTemplates(template, sendTo, locals) {
+function emailTemplates(template, sendTo, locals, logger) {
     try {
         const transport = nodemailer_1.default.createTransport({
             // host: "smtp.ethereal.email",
@@ -46,7 +46,7 @@ function emailTemplates(template, sendTo, locals) {
         });
     }
     catch (error) {
-        (0, config_1.logger)("helpers.ts - emailTemplates").error(error);
+        logger("helpers.ts - emailTemplates").error(error);
     }
 }
 exports.emailTemplates = emailTemplates;
