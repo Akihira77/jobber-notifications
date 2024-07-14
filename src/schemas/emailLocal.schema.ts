@@ -1,7 +1,8 @@
-import { Type } from "@sinclair/typebox";
+import { Type } from "@sinclair/typebox"
 
 export const orderPlacedSchema = Type.Object({
     orderId: Type.String(),
+    invoiceId: Type.String(),
     buyerEmail: Type.String(),
     sellerEmail: Type.String(),
     orderDue: Type.String(),
@@ -14,7 +15,7 @@ export const orderPlacedSchema = Type.Object({
     serviceFee: Type.String(),
     total: Type.String(),
     orderUrl: Type.String()
-});
+})
 
 export const orderDeliveredSchema = Type.Object({
     orderId: Type.String(),
@@ -24,7 +25,7 @@ export const orderDeliveredSchema = Type.Object({
     description: Type.String(),
     orderUrl: Type.String(),
     receiverEmail: Type.String()
-});
+})
 
 export const orderExtensionSchema = Type.Object({
     orderId: Type.String(),
@@ -35,7 +36,7 @@ export const orderExtensionSchema = Type.Object({
     reason: Type.String(),
     orderUrl: Type.String(),
     receiverEmail: Type.String()
-});
+})
 
 export const orderExtensionApprovalSchema = Type.Object({
     subject: Type.String(),
@@ -46,4 +47,4 @@ export const orderExtensionApprovalSchema = Type.Object({
     header: Type.String(),
     orderUrl: Type.String(),
     receiverEmail: Type.String()
-});
+})

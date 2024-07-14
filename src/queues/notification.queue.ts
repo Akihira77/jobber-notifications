@@ -1,406 +1,374 @@
-import { IEmailLocals } from "@Akihira77/jobber-shared";
+import { IEmailLocals } from "@Akihira77/jobber-shared"
 import {
     CLIENT_URL,
     exchangeNamesAndRoutingKeys,
     RABBITMQ_ENDPOINT
-} from "@notifications/config";
-import client, { Connection, Channel, ConsumeMessage } from "amqplib";
-import { Logger } from "winston";
-import { Value } from "@sinclair/typebox/value";
+} from "@notifications/config"
+import client, { Connection, Channel, ConsumeMessage } from "amqplib"
+import { Logger } from "winston"
+import { Value } from "@sinclair/typebox/value"
 import {
     orderDeliveredSchema,
     orderExtensionApprovalSchema,
     orderExtensionSchema,
     orderPlacedSchema
-} from "@notifications/schemas/emailLocal.schema";
-import { sendEmail } from "./mail.transport";
+} from "@notifications/schemas/emailLocal.schema"
+import { sendEmail } from "./mail.transport"
+import typia from "typia"
 
 export class NotificationQueue {
-    constructor(
-        private ch: Channel | null,
-        private logger: (moduleName: string) => Logger
-    ) {}
+    constructor(private logger: (moduleName: string) => Logger) {}
 
-    async createConnection(): Promise<Channel> {
+    async createConnection(): Promise<Connection> {
         try {
             const connection: Connection = await client.connect(
                 `${RABBITMQ_ENDPOINT}`
-            );
-            this.ch = await connection.createChannel();
+            )
+            const ch = await connection.createChannel()
             this.logger("queues/connection.ts - createConnection()").info(
                 "NotificationService connected to RabbitMQ successfully..."
-            );
-            this.closeConnection(this.ch, connection);
+            )
+            this.closeConnection(ch, connection)
 
-            return this.ch;
+            return connection
         } catch (error) {
             this.logger("queues/connection.ts - createConnection()").error(
                 "NotificationService createConnection() method error:",
                 error
-            );
-            process.exit(1);
+            )
+            process.exit(1)
         }
     }
 
-    async consumeAuthEmailMessages(): Promise<void> {
+    async consumeAuthEmailMessages(ch: Channel): Promise<void> {
         try {
-            if (!this.ch) {
-                this.ch = await this.createConnection();
-            }
-
             const { exchangeName, routingKey, queueName } =
-                exchangeNamesAndRoutingKeys.email;
-            await this.ch.assertExchange(exchangeName, "direct");
-            const jobberQueue = await this.ch.assertQueue(queueName, {
+                exchangeNamesAndRoutingKeys.email
+            await ch.assertExchange(exchangeName, "direct")
+            const jobberQueue = await ch.assertQueue(queueName, {
                 durable: true,
                 autoDelete: false
-            });
-            await this.ch.bindQueue(
-                jobberQueue.queue,
-                exchangeName,
-                routingKey
-            );
+            })
+            await ch.bindQueue(jobberQueue.queue, exchangeName, routingKey)
 
             // consume
-            this.ch.consume(
+            ch.consume(
                 jobberQueue.queue,
                 async (msg: ConsumeMessage | null) => {
-                    const appLink = `${CLIENT_URL}`;
-                    const appIcon = "https://i.ibb.co/Kyp2m0t/cover.png";
+                    const appLink = `${CLIENT_URL}`
+                    const appIcon = "https://i.ibb.co/Kyp2m0t/cover.png"
                     try {
-                        const { template, receiverEmail } = JSON.parse(
-                            msg!.content.toString()
-                        );
+                        const { template, receiverEmail } =
+                            typia.json.isParse<any>(msg!.content.toString())
 
                         if (template === "forgotPassword") {
-                            const { resetLink, username } = JSON.parse(
-                                msg!.content.toString()
-                            );
+                            const { resetLink, username } =
+                                typia.json.isParse<any>(msg!.content.toString())
 
                             const locals: IEmailLocals = {
                                 appLink: appLink,
                                 appIcon: appIcon,
                                 username,
                                 resetLink
-                            };
+                            }
 
                             sendEmail(
                                 template,
                                 receiverEmail,
                                 locals,
                                 this.logger
-                            );
+                            )
 
-                            this.ch!.ack(msg!);
+                            ch!.ack(msg!)
                         } else if (template === "resetPasswordSuccess") {
-                            const { username } = JSON.parse(
+                            const { username } = typia.json.isParse<any>(
                                 msg!.content.toString()
-                            );
+                            )
 
                             const locals: IEmailLocals = {
                                 appLink: appLink,
                                 appIcon: appIcon,
                                 username
-                            };
+                            }
 
                             sendEmail(
                                 template,
                                 receiverEmail,
                                 locals,
                                 this.logger
-                            );
+                            )
 
-                            this.ch!.ack(msg!);
+                            ch!.ack(msg!)
                         } else if (template === "verifyEmail") {
-                            const { verifyLink } = JSON.parse(
+                            const { verifyLink } = typia.json.isParse<any>(
                                 msg!.content.toString()
-                            );
+                            )
 
                             const locals: IEmailLocals = {
                                 appLink: appLink,
                                 appIcon: appIcon,
                                 verifyLink
-                            };
+                            }
 
                             sendEmail(
                                 template,
                                 receiverEmail,
                                 locals,
                                 this.logger
-                            );
+                            )
 
-                            this.ch!.ack(msg!);
+                            ch!.ack(msg!)
                         }
 
-                        this.ch!.reject(msg!, false);
+                        ch!.reject(msg!, false)
                     } catch (error) {
-                        this.ch!.reject(msg!, false);
+                        ch!.reject(msg!, false)
 
                         this.logger(
                             "queues/email.consumer.ts - consumeAuthEmailMessages()"
                         ).error(
                             "consuming message got errors. consumeAuthEmailMessages() method",
                             error
-                        );
+                        )
                     }
                 }
-            );
+            )
         } catch (error) {
             this.logger(
                 "queues/email.consumer.ts - consumeAuthEmailMessages()"
             ).error(
                 "NotificationService EmailConsumer consumeAuthEmailMessages(): method error:",
                 error
-            );
+            )
         }
     }
 
-    async consumeOrderEmailMessages(): Promise<void> {
+    async consumeOrderEmailMessages(ch: Channel): Promise<void> {
         try {
-            if (!this.ch) {
-                this.ch = await this.createConnection();
-            }
-
             const { exchangeName, routingKey, queueName } =
-                exchangeNamesAndRoutingKeys.order;
-            await this.ch.assertExchange(exchangeName, "direct");
-            const jobberQueue = await this.ch.assertQueue(queueName, {
+                exchangeNamesAndRoutingKeys.order
+            await ch.assertExchange(exchangeName, "direct")
+            const jobberQueue = await ch.assertQueue(queueName, {
                 durable: true,
                 autoDelete: false
-            });
-            await this.ch.bindQueue(
-                jobberQueue.queue,
-                exchangeName,
-                routingKey
-            );
+            })
+            await ch.bindQueue(jobberQueue.queue, exchangeName, routingKey)
 
             // consume
-            this.ch.consume(
+            ch.consume(
                 jobberQueue.queue,
                 async (msg: ConsumeMessage | null) => {
                     try {
-                        const { template } = JSON.parse(
+                        const { template } = typia.json.isParse<any>(
                             msg!.content.toString()
-                        );
+                        )
 
                         if (template === "orderPlaced") {
-                            this.orderPlaceHandler(msg!);
-                            this.ch!.ack(msg!);
-                            return;
+                            this.orderPlaceHandler(msg!)
+                            ch!.ack(msg!)
+                            return
                         } else if (template === "orderDelivered") {
-                            this.orderDeliverHandler(msg!);
-                            this.ch!.ack(msg!);
-                            return;
+                            this.orderDeliverHandler(msg!)
+                            ch!.ack(msg!)
+                            return
                         } else if (template === "orderExtension") {
-                            this.orderExtensionHandler(msg!);
-                            this.ch!.ack(msg!);
-                            return;
+                            this.orderExtensionHandler(msg!)
+                            ch!.ack(msg!)
+                            return
                         } else if (template === "orderExtensionApproval") {
-                            this.orderExtensionApprovalHandler(msg!);
-                            this.ch!.ack(msg!);
-                            return;
+                            this.orderExtensionApprovalHandler(msg!)
+                            ch!.ack(msg!)
+                            return
                         }
 
-                        this.ch!.reject(msg!, false);
+                        ch!.reject(msg!, false)
                     } catch (error) {
-                        this.ch!.reject(msg!, false);
+                        ch!.reject(msg!, false)
 
                         this.logger(
                             "queues/email.consumer.ts - consumeOrderEmailMessages()"
                         ).error(
                             "consuming message got errors. consumeOrderEmailMessages() method",
                             error
-                        );
+                        )
                     }
                 }
-            );
+            )
         } catch (error) {
             this.logger(
                 "queues/email.consumer.ts - consumeOrderEmailMessages()"
             ).error(
                 "NotificationService EmailConsumer consumeOrderEmailMessages(): method error:",
                 error
-            );
+            )
         }
     }
 
     orderPlaceHandler(msg: ConsumeMessage) {
         try {
-            const {
-                orderId,
-                buyerEmail,
-                sellerEmail,
-                orderDue,
-                amount,
-                buyerUsername,
-                sellerUsername,
-                title,
-                description,
-                requirements,
-                serviceFee,
-                total,
-                orderUrl
-            } = JSON.parse(msg!.content.toString());
+            const data = typia.json.isParse<any>(msg!.content.toString())
 
-            if (!Value.Check(orderPlacedSchema, msg!.content)) {
+            console.log(data, Value.Errors(orderPlacedSchema, data).First())
+            if (!Value.Check(orderPlacedSchema, data)) {
                 throw new Error(
-                    Value.Errors(
-                        orderPlacedSchema,
-                        msg!.content
-                    ).First.toString()
-                );
+                    Value.Errors(orderPlacedSchema, data).First()?.message
+                )
             }
 
             const locals: IEmailLocals = {
                 appLink: `${CLIENT_URL}`,
                 appIcon: "https://i.ibb.co/Kyp2m0t/cover.png",
-                orderId,
-                orderDue,
-                amount,
-                buyerUsername,
-                sellerUsername,
-                title,
-                description,
-                requirements,
-                serviceFee,
-                total,
-                orderUrl
-            };
+                orderId: data.orderId,
+                orderDue: data.orderDue,
+                amount: data.amount,
+                buyerUsername: data.buyerUsername,
+                sellerUsername: data.sellerUsername,
+                title: data.title,
+                description: data.description,
+                requirements: data.requirements,
+                serviceFee: data.serviceFee,
+                total: data.total,
+                orderUrl: data.orderUrl
+            }
 
-            sendEmail("orderPlaced", sellerEmail, locals, this.logger);
-            sendEmail("orderReceipt", buyerEmail, locals, this.logger);
+            sendEmail("orderPlaced", data.sellerEmail, locals, this.logger)
+            sendEmail("orderReceipt", data.buyerEmail, locals, this.logger)
         } catch (error) {
-            throw error;
+            this.logger("queues/notification.queue.ts - ").error(error)
+            throw error
         }
     }
 
     orderDeliverHandler(msg: ConsumeMessage) {
         try {
-            const {
-                orderId,
-                buyerUsername,
-                sellerUsername,
-                title,
-                description,
-                orderUrl,
-                receiverEmail
-            } = JSON.parse(msg!.content.toString());
+            // {
+            //     orderId,
+            //     buyerUsername,
+            //     sellerUsername,
+            //     title,
+            //     description,
+            //     orderUrl,
+            //     receiverEmail
+            // }
+            const data = typia.json.isParse<any>(msg!.content.toString())
 
-            if (!Value.Check(orderDeliveredSchema, msg!.content)) {
+            if (!Value.Check(orderDeliveredSchema, data)) {
                 throw new Error(
-                    Value.Errors(
-                        orderDeliveredSchema,
-                        msg!.content
-                    ).First.toString()
-                );
+                    Value.Errors(orderDeliveredSchema, data).First()?.message
+                )
             }
 
             const locals: IEmailLocals = {
                 appLink: `${CLIENT_URL}`,
                 appIcon: "https://i.ibb.co/Kyp2m0t/cover.png",
-                orderId,
-                buyerUsername,
-                sellerUsername,
-                title,
-                description,
-                orderUrl
-            };
+                orderId: data.orderId,
+                buyerUsername: data.buyerUsername,
+                sellerUsername: data.sellerUsername,
+                title: data.title,
+                description: data.description,
+                orderUrl: data.orderUrl
+            }
 
-            sendEmail("orderDelivered", receiverEmail, locals, this.logger);
+            sendEmail("orderDelivered", data.receiverEmail, locals, this.logger)
         } catch (error) {
-            throw error;
+            this.logger("queues/notification.queue.ts - ").error(error)
+            throw error
         }
     }
 
     orderExtensionHandler(msg: ConsumeMessage) {
         try {
-            const {
-                orderId,
-                buyerUsername,
-                sellerUsername,
-                originalDate,
-                newDate,
-                reason,
-                orderUrl,
-                receiverEmail
-            } = JSON.parse(msg!.content.toString());
+            // {
+            //     orderId,
+            //     buyerUsername,
+            //     sellerUsername,
+            //     originalDate,
+            //     newDate,
+            //     reason,
+            //     orderUrl,
+            //     receiverEmail
+            // }
+            const data = typia.json.isParse<any>(msg!.content.toString())
 
-            if (!Value.Check(orderExtensionSchema, msg!.content)) {
+            if (!Value.Check(orderExtensionSchema, data)) {
                 throw new Error(
-                    Value.Errors(
-                        orderExtensionSchema,
-                        msg!.content
-                    ).First.toString()
-                );
+                    Value.Errors(orderExtensionSchema, data).First()?.message
+                )
             }
 
             const locals: IEmailLocals = {
                 appLink: `${CLIENT_URL}`,
                 appIcon: "https://i.ibb.co/Kyp2m0t/cover.png",
-                orderId,
-                buyerUsername,
-                sellerUsername,
-                originalDate,
-                newDate,
-                reason,
-                orderUrl
-            };
+                orderId: data.orderId,
+                buyerUsername: data.buyerUsername,
+                sellerUsername: data.sellerUsername,
+                originalDate: data.originalDate,
+                newDate: data.newDate,
+                reason: data.reason,
+                orderUrl: data.orderUrl
+            }
 
-            sendEmail("orderExtension", receiverEmail, locals, this.logger);
+            sendEmail("orderExtension", data.receiverEmail, locals, this.logger)
         } catch (error) {
-            throw error;
+            this.logger("queues/notification.queue.ts - ").error(error)
+            throw error
         }
     }
 
     orderExtensionApprovalHandler(msg: ConsumeMessage) {
         try {
-            const {
-                subject,
-                buyerUsername,
-                sellerUsername,
-                type,
-                message,
-                header,
-                orderUrl,
-                receiverEmail
-            } = JSON.parse(msg!.content.toString());
+            // {
+            //     subject,
+            //     buyerUsername,
+            //     sellerUsername,
+            //     type,
+            //     message,
+            //     header,
+            //     orderUrl,
+            //     receiverEmail
+            // }
+            const data = typia.json.isParse<any>(msg!.content.toString())
 
-            if (!Value.Check(orderExtensionApprovalSchema, msg?.content)) {
+            if (!Value.Check(orderExtensionApprovalSchema, data)) {
                 throw new Error(
-                    Value.Errors(
-                        orderExtensionApprovalSchema,
-                        msg?.content
-                    ).First.toString()
-                );
+                    Value.Errors(orderExtensionApprovalSchema, data).First()
+                        ?.message
+                )
             }
 
             const locals: IEmailLocals = {
                 appLink: `${CLIENT_URL}`,
                 appIcon: "https://i.ibb.co/Kyp2m0t/cover.png",
-                subject,
-                buyerUsername,
-                sellerUsername,
-                header,
-                type,
-                message,
-                orderUrl
-            };
+                subject: data.subject,
+                buyerUsername: data.buyerUsername,
+                sellerUsername: data.sellerUsername,
+                header: data.header,
+                type: data.type,
+                message: data.message,
+                orderUrl: data.orderUrl
+            }
 
             sendEmail(
                 "orderExtensionApproval",
-                receiverEmail,
+                data.receiverEmail,
                 locals,
                 this.logger
-            );
+            )
         } catch (error) {
-            throw error;
+            this.logger("queues/notification.queue.ts - ").error(error)
+            throw error
         }
     }
 
     closeConnection(channel: Channel, connection: Connection): void {
         process.once("SIGINT", async () => {
-            await channel.close();
-            await connection.close();
-        });
+            await channel.close()
+            await connection.close()
+        })
+
+        process.once("SIGTERM", async () => {
+            await channel.close()
+            await connection.close()
+        })
     }
 }

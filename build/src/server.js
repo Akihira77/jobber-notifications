@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.start = void 0;
+exports.start = start;
 const config_1 = require("./config");
 const notification_queue_1 = require("./queues/notification.queue");
 const elasticsearch_1 = require("./elasticsearch");
@@ -25,13 +25,13 @@ function start(app, logger) {
         });
     });
 }
-exports.start = start;
 function startQueues(logger) {
     return __awaiter(this, void 0, void 0, function* () {
-        const queue = new notification_queue_1.NotificationQueue(null, logger);
-        yield queue.createConnection();
-        queue.consumeAuthEmailMessages();
-        queue.consumeOrderEmailMessages();
+        const queue = new notification_queue_1.NotificationQueue(logger);
+        const pub = yield queue.createConnection();
+        const pubCh = yield pub.createChannel();
+        queue.consumeAuthEmailMessages(pubCh);
+        queue.consumeOrderEmailMessages(pubCh);
         // Testing
         // const verificationLink = `${CLIENT_URL}/confirm_email?v_token=123213213adwawda`;
         // const messageDetails: IEmailMessageDetails = {

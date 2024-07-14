@@ -1,1 +1,816 @@
-2024-06-30T01:50:15.702Z - CPU Usage: User: 2140.00ms Sys: 1125.00ms | Memory Total: 16179.30MB Used: 13385.79MB Free: 2793.52MB
+2024-07-05T07:40:16.937Z - PID 1960
+
+    CPU Usage: User: 672.00ms Sys: 157.00ms Percentage: 1.38%
+
+    Memory Total: 16179.30MB
+    RSS: 93.40MB RSS Percentage: 0.58%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 33.97MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T07:41:16.940Z - PID 1960
+
+    CPU Usage: User: 31.00ms Sys: 15.00ms Percentage: 0.08%
+
+    Memory Total: 16179.30MB
+    RSS: 93.54MB RSS Percentage: 0.58%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.05MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T07:42:16.944Z - PID 1960
+
+    CPU Usage: User: 63.00ms Sys: 16.00ms Percentage: 0.13%
+
+    Memory Total: 16179.30MB
+    RSS: 93.61MB RSS Percentage: 0.58%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.12MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T07:43:16.959Z - PID 1960
+
+    CPU Usage: User: 16.00ms Sys: 16.00ms Percentage: 0.05%
+
+    Memory Total: 16179.30MB
+    RSS: 93.68MB RSS Percentage: 0.58%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.23MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T07:44:16.960Z - PID 1960
+
+    CPU Usage: User: 31.00ms Sys: 46.00ms Percentage: 0.13%
+
+    Memory Total: 16179.30MB
+    RSS: 93.77MB RSS Percentage: 0.58%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.30MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T07:45:16.961Z - PID 1960
+
+    CPU Usage: User: 109.00ms Sys: 47.00ms Percentage: 0.26%
+
+    Memory Total: 16179.30MB
+    RSS: 94.52MB RSS Percentage: 0.58%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.45MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T07:46:16.968Z - PID 1960
+
+    CPU Usage: User: 31.00ms Sys: 63.00ms Percentage: 0.16%
+
+    Memory Total: 16179.30MB
+    RSS: 94.53MB RSS Percentage: 0.58%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.48MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T07:47:16.982Z - PID 1960
+
+    CPU Usage: User: 63.00ms Sys: 109.00ms Percentage: 0.29%
+
+    Memory Total: 16179.30MB
+    RSS: 94.66MB RSS Percentage: 0.59%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.57MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T07:48:16.988Z - PID 1960
+
+    CPU Usage: User: 16.00ms Sys: 47.00ms Percentage: 0.10%
+
+    Memory Total: 16179.30MB
+    RSS: 94.70MB RSS Percentage: 0.59%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.60MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T07:52:31.947Z - PID 21252
+
+    CPU Usage: User: 235.00ms Sys: 15.00ms Percentage: 0.42%
+
+    Memory Total: 16179.30MB
+    RSS: 76.12MB RSS Percentage: 0.47%
+    HeapTotal: 37.52MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.61MB HeapUsed Percentage: 0.21%
+    External: 3.65MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T07:53:31.959Z - PID 21252
+
+    CPU Usage: User: 62.00ms Sys: 0.00ms Percentage: 0.10%
+
+    Memory Total: 16179.30MB
+    RSS: 75.32MB RSS Percentage: 0.47%
+    HeapTotal: 36.77MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.62MB HeapUsed Percentage: 0.21%
+    External: 3.65MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T07:54:31.963Z - PID 21252
+
+    CPU Usage: User: 16.00ms Sys: 0.00ms Percentage: 0.03%
+
+    Memory Total: 16179.30MB
+    RSS: 75.63MB RSS Percentage: 0.47%
+    HeapTotal: 36.77MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.70MB HeapUsed Percentage: 0.21%
+    External: 3.65MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T07:55:31.973Z - PID 21252
+
+    CPU Usage: User: 15.00ms Sys: 0.00ms Percentage: 0.02%
+
+    Memory Total: 16179.30MB
+    RSS: 75.75MB RSS Percentage: 0.47%
+    HeapTotal: 36.77MB HeapTotal Percentage: 0.23%
+    HeapUsed: 35.11MB HeapUsed Percentage: 0.22%
+    External: 3.65MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T07:57:38.496Z - PID 17524
+
+    CPU Usage: User: 344.00ms Sys: 16.00ms Percentage: 0.60%
+
+    Memory Total: 16179.30MB
+    RSS: 76.35MB RSS Percentage: 0.47%
+    HeapTotal: 37.52MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.62MB HeapUsed Percentage: 0.21%
+    External: 3.65MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T07:58:38.496Z - PID 17524
+
+    CPU Usage: User: 0.00ms Sys: 16.00ms Percentage: 0.03%
+
+    Memory Total: 16179.30MB
+    RSS: 75.57MB RSS Percentage: 0.47%
+    HeapTotal: 36.52MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.46MB HeapUsed Percentage: 0.21%
+    External: 3.65MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T07:59:38.511Z - PID 17524
+
+    CPU Usage: User: 78.00ms Sys: 0.00ms Percentage: 0.13%
+
+    Memory Total: 16179.30MB
+    RSS: 75.86MB RSS Percentage: 0.47%
+    HeapTotal: 36.52MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.62MB HeapUsed Percentage: 0.21%
+    External: 3.65MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T08:00:38.514Z - PID 17524
+
+    CPU Usage: User: 63.00ms Sys: 31.00ms Percentage: 0.16%
+
+    Memory Total: 16179.30MB
+    RSS: 75.91MB RSS Percentage: 0.47%
+    HeapTotal: 37.02MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.79MB HeapUsed Percentage: 0.22%
+    External: 3.65MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T08:01:38.525Z - PID 17524
+
+    CPU Usage: User: 47.00ms Sys: 0.00ms Percentage: 0.08%
+
+    Memory Total: 16179.30MB
+    RSS: 76.18MB RSS Percentage: 0.47%
+    HeapTotal: 37.02MB HeapTotal Percentage: 0.23%
+    HeapUsed: 35.13MB HeapUsed Percentage: 0.22%
+    External: 3.65MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T08:02:38.526Z - PID 17524
+
+    CPU Usage: User: 93.00ms Sys: 0.00ms Percentage: 0.15%
+
+    Memory Total: 16179.30MB
+    RSS: 75.91MB RSS Percentage: 0.47%
+    HeapTotal: 37.02MB HeapTotal Percentage: 0.23%
+    HeapUsed: 35.23MB HeapUsed Percentage: 0.22%
+    External: 3.65MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T08:04:13.529Z - PID 7480
+
+    CPU Usage: User: 328.00ms Sys: 31.00ms Percentage: 0.60%
+
+    Memory Total: 16179.30MB
+    RSS: 76.09MB RSS Percentage: 0.47%
+    HeapTotal: 37.27MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.38MB HeapUsed Percentage: 0.21%
+    External: 3.65MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T08:05:13.544Z - PID 7480
+
+    CPU Usage: User: 15.00ms Sys: 16.00ms Percentage: 0.05%
+
+    Memory Total: 16179.30MB
+    RSS: 74.68MB RSS Percentage: 0.46%
+    HeapTotal: 36.27MB HeapTotal Percentage: 0.22%
+    HeapUsed: 34.26MB HeapUsed Percentage: 0.21%
+    External: 3.65MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T08:06:13.544Z - PID 7480
+
+    CPU Usage: User: 32.00ms Sys: 15.00ms Percentage: 0.08%
+
+    Memory Total: 16179.30MB
+    RSS: 74.97MB RSS Percentage: 0.46%
+    HeapTotal: 36.27MB HeapTotal Percentage: 0.22%
+    HeapUsed: 34.49MB HeapUsed Percentage: 0.21%
+    External: 3.65MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T08:07:13.565Z - PID 7480
+
+    CPU Usage: User: 31.00ms Sys: 0.00ms Percentage: 0.05%
+
+    Memory Total: 16179.30MB
+    RSS: 75.07MB RSS Percentage: 0.46%
+    HeapTotal: 36.52MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.40MB HeapUsed Percentage: 0.21%
+    External: 3.65MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T08:08:13.575Z - PID 7480
+
+    CPU Usage: User: 94.00ms Sys: 16.00ms Percentage: 0.18%
+
+    Memory Total: 16179.30MB
+    RSS: 75.29MB RSS Percentage: 0.47%
+    HeapTotal: 36.52MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.81MB HeapUsed Percentage: 0.22%
+    External: 3.65MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T08:09:13.580Z - PID 7480
+
+    CPU Usage: User: 93.00ms Sys: 0.00ms Percentage: 0.15%
+
+    Memory Total: 16179.30MB
+    RSS: 75.41MB RSS Percentage: 0.47%
+    HeapTotal: 36.52MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.90MB HeapUsed Percentage: 0.22%
+    External: 3.65MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T08:10:13.581Z - PID 7480
+
+    CPU Usage: User: 32.00ms Sys: 15.00ms Percentage: 0.08%
+
+    Memory Total: 16179.30MB
+    RSS: 75.50MB RSS Percentage: 0.47%
+    HeapTotal: 36.52MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.67MB HeapUsed Percentage: 0.21%
+    External: 3.66MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T08:11:13.583Z - PID 7480
+
+    CPU Usage: User: 125.00ms Sys: 16.00ms Percentage: 0.23%
+
+    Memory Total: 16179.30MB
+    RSS: 75.23MB RSS Percentage: 0.47%
+    HeapTotal: 36.52MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.38MB HeapUsed Percentage: 0.21%
+    External: 3.66MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T08:12:13.587Z - PID 7480
+
+    CPU Usage: User: 46.00ms Sys: 0.00ms Percentage: 0.08%
+
+    Memory Total: 16179.30MB
+    RSS: 75.45MB RSS Percentage: 0.47%
+    HeapTotal: 36.52MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.58MB HeapUsed Percentage: 0.21%
+    External: 3.66MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T08:13:13.598Z - PID 7480
+
+    CPU Usage: User: 32.00ms Sys: 0.00ms Percentage: 0.05%
+
+    Memory Total: 16179.30MB
+    RSS: 75.32MB RSS Percentage: 0.47%
+    HeapTotal: 36.52MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.37MB HeapUsed Percentage: 0.21%
+    External: 3.66MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T13:44:53.544Z - PID 17872
+
+    CPU Usage: User: 734.00ms Sys: 266.00ms Percentage: 1.67%
+
+    Memory Total: 16179.30MB
+    RSS: 91.43MB RSS Percentage: 0.57%
+    HeapTotal: 36.16MB HeapTotal Percentage: 0.22%
+    HeapUsed: 33.90MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T13:45:53.556Z - PID 17872
+
+    CPU Usage: User: 110.00ms Sys: 109.00ms Percentage: 0.36%
+
+    Memory Total: 16179.30MB
+    RSS: 91.56MB RSS Percentage: 0.57%
+    HeapTotal: 36.16MB HeapTotal Percentage: 0.22%
+    HeapUsed: 33.97MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T13:46:53.564Z - PID 17872
+
+    CPU Usage: User: 281.00ms Sys: 125.00ms Percentage: 0.68%
+
+    Memory Total: 16179.30MB
+    RSS: 91.64MB RSS Percentage: 0.57%
+    HeapTotal: 36.16MB HeapTotal Percentage: 0.22%
+    HeapUsed: 34.05MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T13:47:53.566Z - PID 17872
+
+    CPU Usage: User: 62.00ms Sys: 94.00ms Percentage: 0.26%
+
+    Memory Total: 16179.30MB
+    RSS: 91.71MB RSS Percentage: 0.57%
+    HeapTotal: 36.16MB HeapTotal Percentage: 0.22%
+    HeapUsed: 34.13MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T13:48:53.572Z - PID 17872
+
+    CPU Usage: User: 16.00ms Sys: 0.00ms Percentage: 0.03%
+
+    Memory Total: 16179.30MB
+    RSS: 91.81MB RSS Percentage: 0.57%
+    HeapTotal: 36.16MB HeapTotal Percentage: 0.22%
+    HeapUsed: 34.21MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T13:49:53.580Z - PID 17872
+
+    CPU Usage: User: 31.00ms Sys: 16.00ms Percentage: 0.08%
+
+    Memory Total: 16179.30MB
+    RSS: 92.74MB RSS Percentage: 0.57%
+    HeapTotal: 36.16MB HeapTotal Percentage: 0.22%
+    HeapUsed: 34.35MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T13:50:53.581Z - PID 17872
+
+    CPU Usage: User: 16.00ms Sys: 78.00ms Percentage: 0.16%
+
+    Memory Total: 16179.30MB
+    RSS: 92.75MB RSS Percentage: 0.57%
+    HeapTotal: 36.16MB HeapTotal Percentage: 0.22%
+    HeapUsed: 34.38MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T13:51:53.583Z - PID 17872
+
+    CPU Usage: User: 0.00ms Sys: 0.00ms Percentage: 0.00%
+
+    Memory Total: 16179.30MB
+    RSS: 92.79MB RSS Percentage: 0.57%
+    HeapTotal: 36.16MB HeapTotal Percentage: 0.22%
+    HeapUsed: 34.42MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T13:52:53.598Z - PID 17872
+
+    CPU Usage: User: 15.00ms Sys: 47.00ms Percentage: 0.10%
+
+    Memory Total: 16179.30MB
+    RSS: 92.83MB RSS Percentage: 0.57%
+    HeapTotal: 36.16MB HeapTotal Percentage: 0.22%
+    HeapUsed: 34.45MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T13:53:53.600Z - PID 17872
+
+    CPU Usage: User: 16.00ms Sys: 31.00ms Percentage: 0.08%
+
+    Memory Total: 16179.30MB
+    RSS: 92.90MB RSS Percentage: 0.57%
+    HeapTotal: 36.16MB HeapTotal Percentage: 0.22%
+    HeapUsed: 34.49MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T13:54:53.603Z - PID 17872
+
+    CPU Usage: User: 16.00ms Sys: 0.00ms Percentage: 0.03%
+
+    Memory Total: 16179.30MB
+    RSS: 92.98MB RSS Percentage: 0.57%
+    HeapTotal: 36.16MB HeapTotal Percentage: 0.22%
+    HeapUsed: 34.56MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T13:55:53.605Z - PID 17872
+
+    CPU Usage: User: 15.00ms Sys: 0.00ms Percentage: 0.02%
+
+    Memory Total: 16179.30MB
+    RSS: 93.00MB RSS Percentage: 0.57%
+    HeapTotal: 36.16MB HeapTotal Percentage: 0.22%
+    HeapUsed: 34.57MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T13:56:53.605Z - PID 17872
+
+    CPU Usage: User: 16.00ms Sys: 16.00ms Percentage: 0.05%
+
+    Memory Total: 16179.30MB
+    RSS: 93.01MB RSS Percentage: 0.57%
+    HeapTotal: 36.16MB HeapTotal Percentage: 0.22%
+    HeapUsed: 34.59MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T13:57:53.604Z - PID 17872
+
+    CPU Usage: User: 31.00ms Sys: 15.00ms Percentage: 0.08%
+
+    Memory Total: 16179.30MB
+    RSS: 93.03MB RSS Percentage: 0.57%
+    HeapTotal: 36.16MB HeapTotal Percentage: 0.22%
+    HeapUsed: 34.60MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T13:58:53.613Z - PID 17872
+
+    CPU Usage: User: 0.00ms Sys: 16.00ms Percentage: 0.03%
+
+    Memory Total: 16179.30MB
+    RSS: 93.04MB RSS Percentage: 0.58%
+    HeapTotal: 36.16MB HeapTotal Percentage: 0.22%
+    HeapUsed: 34.61MB HeapUsed Percentage: 0.21%
+    External: 3.58MB External Percentage: 0.02%
+    ArrayBuffer: 0.16MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T13:59:53.626Z - PID 17872
+
+    CPU Usage: User: 0.00ms Sys: 16.00ms Percentage: 0.03%
+
+    Memory Total: 16179.30MB
+    RSS: 93.05MB RSS Percentage: 0.58%
+    HeapTotal: 36.16MB HeapTotal Percentage: 0.22%
+    HeapUsed: 34.63MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:00:53.634Z - PID 17872
+
+    CPU Usage: User: 0.00ms Sys: 0.00ms Percentage: 0.00%
+
+    Memory Total: 16179.30MB
+    RSS: 93.07MB RSS Percentage: 0.58%
+    HeapTotal: 36.16MB HeapTotal Percentage: 0.22%
+    HeapUsed: 34.64MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:01:53.638Z - PID 17872
+
+    CPU Usage: User: 16.00ms Sys: 15.00ms Percentage: 0.05%
+
+    Memory Total: 16179.30MB
+    RSS: 78.30MB RSS Percentage: 0.48%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 33.87MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:02:53.642Z - PID 17872
+
+    CPU Usage: User: 15.00ms Sys: 16.00ms Percentage: 0.05%
+
+    Memory Total: 16179.30MB
+    RSS: 78.32MB RSS Percentage: 0.48%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 33.88MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:03:53.648Z - PID 17872
+
+    CPU Usage: User: 0.00ms Sys: 0.00ms Percentage: 0.00%
+
+    Memory Total: 16179.30MB
+    RSS: 78.33MB RSS Percentage: 0.48%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 33.90MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:04:53.651Z - PID 17872
+
+    CPU Usage: User: 16.00ms Sys: 47.00ms Percentage: 0.10%
+
+    Memory Total: 16179.30MB
+    RSS: 78.35MB RSS Percentage: 0.48%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 33.91MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:05:53.661Z - PID 17872
+
+    CPU Usage: User: 16.00ms Sys: 15.00ms Percentage: 0.05%
+
+    Memory Total: 16179.30MB
+    RSS: 78.36MB RSS Percentage: 0.48%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 33.93MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:06:53.670Z - PID 17872
+
+    CPU Usage: User: 15.00ms Sys: 16.00ms Percentage: 0.05%
+
+    Memory Total: 16179.30MB
+    RSS: 78.38MB RSS Percentage: 0.48%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 33.94MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:07:53.670Z - PID 17872
+
+    CPU Usage: User: 0.00ms Sys: 62.00ms Percentage: 0.10%
+
+    Memory Total: 16179.30MB
+    RSS: 78.39MB RSS Percentage: 0.48%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 33.95MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:08:53.685Z - PID 17872
+
+    CPU Usage: User: 32.00ms Sys: 63.00ms Percentage: 0.16%
+
+    Memory Total: 16179.30MB
+    RSS: 78.64MB RSS Percentage: 0.49%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 33.97MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:09:53.687Z - PID 17872
+
+    CPU Usage: User: 46.00ms Sys: 0.00ms Percentage: 0.08%
+
+    Memory Total: 16179.30MB
+    RSS: 78.66MB RSS Percentage: 0.49%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 33.98MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:10:53.691Z - PID 17872
+
+    CPU Usage: User: 32.00ms Sys: 47.00ms Percentage: 0.13%
+
+    Memory Total: 16179.30MB
+    RSS: 78.67MB RSS Percentage: 0.49%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 33.99MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:11:53.695Z - PID 17872
+
+    CPU Usage: User: 0.00ms Sys: 0.00ms Percentage: 0.00%
+
+    Memory Total: 16179.30MB
+    RSS: 78.69MB RSS Percentage: 0.49%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.01MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:12:53.703Z - PID 17872
+
+    CPU Usage: User: 15.00ms Sys: 0.00ms Percentage: 0.02%
+
+    Memory Total: 16179.30MB
+    RSS: 69.28MB RSS Percentage: 0.43%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.02MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:13:53.711Z - PID 17872
+
+    CPU Usage: User: 32.00ms Sys: 78.00ms Percentage: 0.18%
+
+    Memory Total: 16179.30MB
+    RSS: 69.29MB RSS Percentage: 0.43%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.03MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:14:53.713Z - PID 17872
+
+    CPU Usage: User: 31.00ms Sys: 16.00ms Percentage: 0.08%
+
+    Memory Total: 16179.30MB
+    RSS: 69.30MB RSS Percentage: 0.43%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.05MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:15:53.717Z - PID 17872
+
+    CPU Usage: User: 31.00ms Sys: 0.00ms Percentage: 0.05%
+
+    Memory Total: 16179.30MB
+    RSS: 69.32MB RSS Percentage: 0.43%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.06MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:16:53.724Z - PID 17872
+
+    CPU Usage: User: 16.00ms Sys: 15.00ms Percentage: 0.05%
+
+    Memory Total: 16179.30MB
+    RSS: 69.33MB RSS Percentage: 0.43%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.07MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:17:53.730Z - PID 17872
+
+    CPU Usage: User: 15.00ms Sys: 0.00ms Percentage: 0.02%
+
+    Memory Total: 16179.30MB
+    RSS: 46.14MB RSS Percentage: 0.29%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.09MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:18:53.738Z - PID 17872
+
+    CPU Usage: User: 32.00ms Sys: 0.00ms Percentage: 0.05%
+
+    Memory Total: 16179.30MB
+    RSS: 46.16MB RSS Percentage: 0.29%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.10MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.17MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:19:53.745Z - PID 17872
+
+    CPU Usage: User: 15.00ms Sys: 0.00ms Percentage: 0.02%
+
+    Memory Total: 16179.30MB
+    RSS: 46.17MB RSS Percentage: 0.29%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.11MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.18MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:20:53.748Z - PID 17872
+
+    CPU Usage: User: 16.00ms Sys: 16.00ms Percentage: 0.05%
+
+    Memory Total: 16179.30MB
+    RSS: 46.18MB RSS Percentage: 0.29%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.13MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.18MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:21:53.756Z - PID 17872
+
+    CPU Usage: User: 15.00ms Sys: 15.00ms Percentage: 0.05%
+
+    Memory Total: 16179.30MB
+    RSS: 46.20MB RSS Percentage: 0.29%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.14MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.18MB ArrayBuffer Percentage: 0.00%
+    
+
+2024-07-05T14:22:53.768Z - PID 17872
+
+    CPU Usage: User: 0.00ms Sys: 0.00ms Percentage: 0.00%
+
+    Memory Total: 16179.30MB
+    RSS: 46.21MB RSS Percentage: 0.29%
+    HeapTotal: 37.16MB HeapTotal Percentage: 0.23%
+    HeapUsed: 34.15MB HeapUsed Percentage: 0.21%
+    External: 3.59MB External Percentage: 0.02%
+    ArrayBuffer: 0.18MB ArrayBuffer Percentage: 0.00%
+    
+

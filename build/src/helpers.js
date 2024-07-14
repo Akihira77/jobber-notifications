@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.emailTemplates = void 0;
+exports.emailTemplates = emailTemplates;
 const path_1 = __importDefault(require("path"));
 const config_1 = require("./config");
 const nodemailer_1 = __importDefault(require("nodemailer"));
@@ -49,5 +49,4 @@ function emailTemplates(template, sendTo, locals, logger) {
         logger("helpers.ts - emailTemplates").error(error);
     }
 }
-exports.emailTemplates = emailTemplates;
 //# sourceMappingURL=helpers.js.map

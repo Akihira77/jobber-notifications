@@ -4,6 +4,7 @@ exports.orderExtensionApprovalSchema = exports.orderExtensionSchema = exports.or
 const typebox_1 = require("@sinclair/typebox");
 exports.orderPlacedSchema = typebox_1.Type.Object({
     orderId: typebox_1.Type.String(),
+    invoiceId: typebox_1.Type.String(),
     buyerEmail: typebox_1.Type.String(),
     sellerEmail: typebox_1.Type.String(),
     orderDue: typebox_1.Type.String(),
